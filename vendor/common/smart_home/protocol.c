@@ -1951,7 +1951,15 @@ rx_cb_err_t smart_home_GATT_rx_handle(void *p, int pair_flag)
 
 int smart_home_GATT_rx_command(void *p)
 {
-	smart_home_GATT_rx_handle(p, 0);
+	u8 *data = ((rf_packet_att_write_t *)p)->value;
+
+	switch (data[0]){
+
+	case 0x01: light_onoff(1); break;
+	case 0x02: light_onoff(0); break;
+	case 0x03: light_adjust_lightness(data[1]); break;
+	case 0x04: light_adjust_CT(data[2], data[1]); break;
+	}
 
 	return 0;
 }
