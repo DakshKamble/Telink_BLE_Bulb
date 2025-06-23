@@ -54,7 +54,7 @@ typedef struct{
 	u8  opcode;
 	u8 handle;
 	u8 handle1;
-	u8 value;
+	u8 value[];
 }rf_packet_att_write_t;
 
 #endif	/* BLE_FORMAT_H */
